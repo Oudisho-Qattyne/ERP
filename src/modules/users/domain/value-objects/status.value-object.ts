@@ -8,9 +8,9 @@ const errorCodes = {
 export const statusSchema = z
     .enum(["active" , "unactive"] , errorCodes.STATUS_INVALID)
 
-export type status = z.infer<typeof statusSchema>
+export type Status = z.infer<typeof statusSchema>
 
-export const createstatus = (status: string): status => {
+export const createstatus = (status: string): Status => {
     status = status.trim()
     return statusSchema.parse(status)
 }
