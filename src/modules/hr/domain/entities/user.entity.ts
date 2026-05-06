@@ -1,12 +1,12 @@
 import { z } from "zod";
 import { randomUUID } from "crypto";
-import { UserIdSchema } from "../value-objects/userId.value-object";
-import { nameSchema } from "../value-objects/name.value-object";
-import { roleSchema } from "../value-objects/role.value-object";
-import { jobTitleSchema } from "../value-objects/jobTitle.value-object";
-import { statusSchema } from "../value-objects/status.value-object";
-import { EmailSchema } from "../value-objects/email.value-object";
-import { UsernameSchema } from "../value-objects/username.value-object";
+import { UserIdSchema } from "../value-objects/user-id.user.value-object";
+import { nameSchema } from "../value-objects/name.user.value-object";
+import { roleSchema } from "../value-objects/role.user.value-object";
+import { jobTitleSchema } from "../value-objects/job-title.user.value-object";
+import { statusSchema } from "../value-objects/status.user.value-object";
+import { EmailSchema } from "../value-objects/email.user.value-object";
+import { UsernameSchema } from "../value-objects/username.user.value-object";
 
 export const UserSchema = z.object({
     id: UserIdSchema,
