@@ -14,7 +14,7 @@ export const getUserByIdUseCase = async (
   const user = await repo.findById(userId);
 
   if (!user) {
-    return { success: false, error: "USER_NOT_FOUND" };
+    throw Error("")
   }
   return { success: true, user };
 };
