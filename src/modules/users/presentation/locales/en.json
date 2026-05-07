@@ -1,0 +1,11 @@
+{
+    "title": "Investors",
+    "actions": {
+      "add": "Add Investor",
+      "edit": "Edit"
+    },
+    "profile": {
+      "overview": "Overview",
+      "financial": "Financial"
+    }
+  }

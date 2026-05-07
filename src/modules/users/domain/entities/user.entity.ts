@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { randomUUID } from "crypto";
-import { UsernameSchema } from "../value-objects/username.user.value-object";
+import { UsernameSchema } from "../../../shared/domain/value-objects/username.user.value-object";
 import { UserIdSchema } from "../value-objects/user-id.value-object";
-import { EmailSchema } from "../value-objects/email.value-object";
-import { nameSchema } from "../value-objects/name.value-object";
+import { EmailSchema } from "../../../shared/domain/value-objects/email.value-object";
+import { nameSchema } from "../../../shared/domain/value-objects/name.value-object";
 import { roleSchema } from "../value-objects/role.value-object";
 import { jobTitleSchema } from "../value-objects/job-title.value-object";
 import { statusSchema } from "../value-objects/status.value-object";
