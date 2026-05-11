@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "generate-nav": "tsx src/modules/shared/presentation/scripts/generate-nav.ts",
+    "dev": "npm run generate-nav && next dev",
+    "build": "npm run generate-nav && next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -25,6 +26,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }
