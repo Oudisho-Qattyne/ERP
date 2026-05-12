@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "generate-nav": "tsx src/modules/shared/presentation/scripts/generate-nav.ts",
+    "generate-nav": "tsx modules/shared/presentation/scripts/generate-nav.ts",
     "dev": "npm run generate-nav && next dev",
     "build": "npm run generate-nav && next build",
     "start": "next start",

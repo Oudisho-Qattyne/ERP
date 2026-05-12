@@ -1,4 +1,4 @@
-import { navItems as generatedNavItems, navGroups as generatedNavGroups } from './../modules/generated/navigation';
+import { navItems as generatedNavItems, navGroups as generatedNavGroups } from './generated/navigation';
 
 export interface NavItem {
   id: string;
@@ -13,6 +13,10 @@ export interface NavGroup {
   id: string;
   label: string;
   order?: number;
+}
+
+export interface ModuleConfig {
+  hideSidebarPaths?: string[];
 }
 
 export const getAllNavItems = () => generatedNavItems;

@@ -2,9 +2,9 @@
 'use client';
 
 
-import { Button } from '@/src/modules/shared/presentation/components/ui/buttons/Button';
-import { Input } from '@/src/modules/shared/presentation/components/ui/inputs/Input.tsx';
-import { useDynamicForm } from '@/src/modules/shared/presentation/hooks/useDynamicForm';
+import { Button } from '@/modules/shared/presentation/components/ui/buttons/Button';
+import { Input } from '@/modules/shared/presentation/components/ui/inputs/Input.tsx';
+import { useDynamicForm } from '@/modules/shared/presentation/hooks/useDynamicForm';
 import { z } from 'zod';
 
 // Validation schema

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { useMemo } from 'react';
-import { Input, InputType } from './Input.tsx';
+import { Input, InputType } from './Input.tsx.js';
 import { Button } from '../buttons/Button.js';
 import { useDynamicForm } from '../../../hooks/useDynamicForm.js';
 

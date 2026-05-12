@@ -1,4 +1,5 @@
 'use client';
+import { notFound } from 'next/navigation';
 import React from 'react';
 
 export interface RouteConfig {
@@ -42,8 +43,7 @@ export default function ModuleRouter({ routes, subPath, notFoundComponent: NotFo
 
   const matched = matchRoute();
   if (!matched) {
-    if (NotFound) return <NotFound />;
-    return <div className="p-8 text-center text-danger">الصفحة غير موجودة</div>;
+    notFound()
   }
 
   const { Component, params } = matched;

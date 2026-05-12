@@ -1,6 +1,6 @@
 'use client';
 
-import { NavGroup, NavItem } from '@/src/modules/registry';
+import { NavGroup, NavItem } from '@/modules/registry';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

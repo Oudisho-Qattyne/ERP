@@ -1,7 +1,8 @@
+// scripts/generate-nav.ts
 import fs from 'fs';
 import path from 'path';
 
-const modulesDir = path.join(process.cwd(), 'src', 'modules');
+const modulesDir = path.join(process.cwd(), 'modules');
 const outputFile = path.join(modulesDir, 'generated', 'navigation.ts');
 
 interface NavItem {
@@ -19,6 +20,10 @@ interface NavGroup {
   order?: number;
 }
 
+interface ModuleConfig {
+  hideSidebarPaths?: string[];
+}
+
 function scanModules() {
   const modules = fs.readdirSync(modulesDir).filter((file) => {
     const stat = fs.statSync(path.join(modulesDir, file));
@@ -27,13 +32,12 @@ function scanModules() {
 
   const navItems: NavItem[] = [];
   const navGroups: NavGroup[] = [];
+  const hideSidebarPaths: string[] = [];
 
   for (const moduleName of modules) {
-    const navPath = path.join(modulesDir, moduleName, 'presentation/navigation.ts');
+    const navPath = path.join(modulesDir, moduleName, 'presentation', 'navigation.ts');
     if (!fs.existsSync(navPath)) continue;
 
-    // We'll use dynamic import to read the file's exports
-    // Since this is a build script, we can use require
     try {
       // Clear require cache to avoid stale data
       delete require.cache[require.resolve(navPath)];
@@ -44,6 +48,9 @@ function scanModules() {
       }
       if (moduleExports.navGroups) {
         navGroups.push(...moduleExports.navGroups);
+      }
+      if (moduleExports.config?.hideSidebarPaths) {
+        hideSidebarPaths.push(...moduleExports.config.hideSidebarPaths);
       }
     } catch (err) {
       console.warn(`Error loading navigation from ${moduleName}:`, err);
@@ -58,12 +65,18 @@ export const navItems = ${JSON.stringify(navItems, null, 2)};
 
 export const navGroups = ${JSON.stringify(navGroups, null, 2)};
 
+export const hideSidebarPaths = ${JSON.stringify(hideSidebarPaths, null, 2)};
+
 export function getAllNavItems() {
   return navItems;
 }
 
 export function getAllNavGroups() {
   return navGroups;
+}
+
+export function getHideSidebarPaths() {
+  return hideSidebarPaths;
 }
 `;
 

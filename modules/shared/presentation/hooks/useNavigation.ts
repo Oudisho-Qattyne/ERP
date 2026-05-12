@@ -1,7 +1,7 @@
 // src/hooks/useNavigation.ts
 'use client';
 
-import { getAllNavGroups, getAllNavItems, NavGroup, NavItem } from '@/src/modules/registry';
+import { getAllNavGroups, getAllNavItems, NavGroup, NavItem } from '@/modules/registry';
 import { useEffect, useState } from 'react';
 
 export function useNavigation(role?: string) {

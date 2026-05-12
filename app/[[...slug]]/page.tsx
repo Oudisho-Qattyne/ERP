@@ -5,7 +5,7 @@ async function loadModule(moduleName: string) {
   console.log(moduleName);
   
   try {
-    const mod = await import(`@/src/modules/${moduleName}/presentation/index`);
+    const mod = await import(`@/modules/${moduleName}/presentation/index`);
     return mod.default; 
   } catch {
     return null;

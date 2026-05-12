@@ -19,10 +19,18 @@ export const navGroups = [
   }
 ];
 
+export const hideSidebarPaths = [
+  "/users/*"
+];
+
 export function getAllNavItems() {
   return navItems;
 }
 
 export function getAllNavGroups() {
   return navGroups;
+}
+
+export function getHideSidebarPaths() {
+  return hideSidebarPaths;
 }
