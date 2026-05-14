@@ -5,9 +5,9 @@ export const navItems = [
   {
     "id": "login",
     "label": "تسجيل الدخول",
-    "icon": "🏢",
-    "group": "crm",
-    "href": "/users"
+    "icon": "🔐",
+    "group": "",
+    "href": "/auth"
   }
 ];
 
@@ -20,6 +20,7 @@ export const navGroups = [
 ];
 
 export const hideSidebarPaths = [
+  "/auth*",
   "/users/*"
 ];
 

@@ -1,31 +1,47 @@
-// src/app/login/page.tsx (or src/pages/login.tsx)
 'use client';
 
-
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
 import { Button } from '@/modules/shared/presentation/components/ui/buttons/Button';
 import { Input } from '@/modules/shared/presentation/components/ui/inputs/Input.tsx';
 import { useDynamicForm } from '@/modules/shared/presentation/hooks/useDynamicForm';
-import { z } from 'zod';
+
+import { useAuth } from '../hooks/useAuth';
 
 // Validation schema
 const loginSchema = z.object({
-  username: z.string().min(1, 'اسم المستخدم مطلوب'),
+  email: z.string().email('البريد الإلكتروني غير صالح').min(1, 'البريد الإلكتروني مطلوب'),
   password: z.string().min(1, 'كلمة المرور مطلوبة'),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
-  const { fieldProps, handleSubmit, isValid, isSubmitting } = useDynamicForm<LoginFormData>({
+  const router = useRouter();
+  const { login, isLoading: isLoginLoading, error: authError } = useAuth();
+
+  const { fieldProps, handleSubmit, isValid, isSubmitting, form } = useDynamicForm<LoginFormData>({
     schema: loginSchema,
-    defaultValues: { username: '', password: '' },
+    defaultValues: { email: '', password: '' },
     mode: 'onChange',
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    // Replace with your actual authentication logic
-    console.log('Login attempt:', data);
-    // Example: call your API, context, etc.
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      await login(data);
+      // Redirect to home or dashboard after successful login
+      router.push('/');
+    } catch (err: any) {
+      console.error('Login failed:', err);
+      if (err.validationErrors) {
+        Object.keys(err.validationErrors).forEach((key) => {
+          const messages = err.validationErrors[key];
+          const message = Array.isArray(messages) ? messages[0] : messages;
+          form.setError(key as keyof LoginFormData, { type: 'server', message });
+        });
+      }
+    }
   };
 
   return (
@@ -44,11 +60,18 @@ export default function LoginPage() {
           <p className="text-xs text-text-light mt-1">الجمهورية العربية السورية — محافظة حمص</p>
         </div>
 
+        {authError && (
+          <div className="mb-4 p-3 bg-red-100 text-red-700 text-sm rounded-lg text-center">
+            {authError}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <Input
-            {...fieldProps('username')}
-            label="اسم المستخدم"
-            placeholder="admin"
+            {...fieldProps('email')}
+            type="email"
+            label="البريد الإلكتروني"
+            placeholder="admin@example.com"
           />
           <Input
             {...fieldProps('password')}
@@ -62,7 +85,7 @@ export default function LoginPage() {
             variant="gold"
             fullWidth
             size="lg"
-            isLoading={isSubmitting}
+            isLoading={isSubmitting || isLoginLoading}
             disabled={!isValid}
           >
             تسجيل الدخول

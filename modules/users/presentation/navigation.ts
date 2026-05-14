@@ -5,13 +5,6 @@ export const navGroups: NavGroup[] = [
 ];
 
 export const navItems: NavItem[] = [
-  {
-    id: 'login',
-    label: 'تسجيل الدخول',
-    icon: '🏢',
-    group: 'crm',
-    href: '/users',
-  },
 //   {
 //     id: 'pipeline',
 //     label: 'فرص الاستثمار',
