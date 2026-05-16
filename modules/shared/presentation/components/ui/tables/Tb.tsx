@@ -7,10 +7,8 @@ interface TbProps {
 
 export function Tb({ children }: TbProps) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full border-collapse rtl:text-right ltr:text-left">
-        {children}
-      </table>
-    </div>
+    <table className="min-w-full w-max border-collapse rtl:text-right ltr:text-left">
+      {children}
+    </table>
   );
 }

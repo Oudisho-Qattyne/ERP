@@ -1,0 +1,152 @@
+[
+  {
+    "id": "1",
+    "personal_id": "EMP-001",
+    "full_name": "محمد أحمد علي",
+    "job_title": "مدير مالي",
+    "org_level_1": "الإدارة المالية",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2020-01-15",
+    "status": "active"
+  },
+  {
+    "id": "2",
+    "personal_id": "EMP-002",
+    "full_name": "سارة محمود حسن",
+    "job_title": "مهندس برمجيات",
+    "org_level_1": "مديرية تقانة المعلومات",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2021-03-22",
+    "status": "active"
+  },
+  {
+    "id": "3",
+    "personal_id": "EMP-003",
+    "full_name": "خالد وليد ابراهيم",
+    "job_title": "محاسب",
+    "org_level_1": "الإدارة المالية",
+    "contract_nature": "عقد سنوي",
+    "date_of_appointment": "2022-05-10",
+    "status": "active"
+  },
+  {
+    "id": "4",
+    "personal_id": "EMP-004",
+    "full_name": "ليلى سمير يوسف",
+    "job_title": "مديرة موارد بشرية",
+    "org_level_1": "مديرية الموارد البشرية",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2019-11-05",
+    "status": "active"
+  },
+  {
+    "id": "5",
+    "personal_id": "EMP-005",
+    "full_name": "ياسين عمر بكر",
+    "job_title": "فني صيانة",
+    "org_level_1": "الخدمات العامة",
+    "contract_nature": "عقد يومي",
+    "date_of_appointment": "2023-02-14",
+    "status": "active"
+  },
+  {
+    "id": "6",
+    "personal_id": "EMP-006",
+    "full_name": "نور الهدى مصطفى",
+    "job_title": "سكرتيرة تنفذية",
+    "org_level_1": "المكتب الفني",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2021-08-30",
+    "status": "on_leave"
+  },
+  {
+    "id": "7",
+    "personal_id": "EMP-007",
+    "full_name": "رامي كمال جود",
+    "job_title": "رئيس قسم المشتريات",
+    "org_level_1": "المديرية التجارية",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2018-04-12",
+    "status": "active"
+  },
+  {
+    "id": "8",
+    "personal_id": "EMP-008",
+    "full_name": "منى عبد الرحمن",
+    "job_title": "محلل بيانات",
+    "org_level_1": "مديرية التخطيط",
+    "contract_nature": "عقد سنوي",
+    "date_of_appointment": "2022-09-01",
+    "status": "active"
+  },
+  {
+    "id": "9",
+    "personal_id": "EMP-009",
+    "full_name": "فادي غسان مطر",
+    "job_title": "سائق",
+    "org_level_1": "الخدمات العامة",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2017-12-20",
+    "status": "active"
+  },
+  {
+    "id": "10",
+    "personal_id": "EMP-010",
+    "full_name": "عبير صبحي حامد",
+    "job_title": "مديرة تسويق",
+    "org_level_1": "المديرية التجارية",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2020-06-15",
+    "status": "active"
+  },
+  {
+    "id": "11",
+    "personal_id": "EMP-011",
+    "full_name": "مازن سامي رشيد",
+    "job_title": "مهندس كهرباء",
+    "org_level_1": "مديرية الصيانة",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2019-02-28",
+    "status": "active"
+  },
+  {
+    "id": "12",
+    "personal_id": "EMP-012",
+    "full_name": "هناء وائل كمال",
+    "job_title": "باحث قانوني",
+    "org_level_1": "المديرية القانونية",
+    "contract_nature": "عقد سنوي",
+    "date_of_appointment": "2023-01-10",
+    "status": "active"
+  },
+  {
+    "id": "13",
+    "personal_id": "EMP-013",
+    "full_name": "باسم منير عيسى",
+    "job_title": "رئيس قسم المستودعات",
+    "org_level_1": "المديرية التجارية",
+    "contract_nature": "دائم",
+    "date_of_appointment": "2016-10-05",
+    "status": "active"
+  },
+  {
+    "id": "14",
+    "personal_id": "EMP-014",
+    "full_name": "جنى سمير العلي",
+    "job_title": "مساعد إداري",
+    "org_level_1": "مديرية الموارد البشرية",
+    "contract_nature": "عقد سنوي",
+    "date_of_appointment": "2022-11-20",
+    "status": "active"
+  },
+  {
+    "id": "15",
+    "personal_id": "EMP-015",
+    "full_name": "عصام فؤاد زكي",
+    "job_title": "عامل مهني",
+    "org_level_1": "مديرية الصيانة",
+    "contract_nature": "عقد يومي",
+    "date_of_appointment": "2023-05-01",
+    "status": "active"
+  }
+]

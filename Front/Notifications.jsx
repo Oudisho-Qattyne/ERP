@@ -1,0 +1,6 @@
+// ════════════ NOTIFICATIONS ════════════
+function NotifView({cu}) {
+  const [tick,sTick]=useState(0);const ns=DB.notifications.filter(n=>n.uid===cu.id);const ur=ns.filter(n=>!n.read).length;
+  return <div><div style={{display:"flex",gap:8,marginBottom:14,alignItems:"center"}}><span style={{fontSize:12,color:C.muted,fontWeight:600}}>{ur} غير مقروء</span><div style={{flex:1}}/>{ur>0&&<button onClick={()=>{ns.forEach(n=>{n.read=1});sTick(t=>t+1);}} style={bS}>تحديد الكل كمقروء</button>}</div><div style={cd}>{ns.length===0?<Em t="لا توجد إشعارات"/>:ns.map(n=><div key={n.id} onClick={()=>{if(!n.read){n.read=1;sTick(t=>t+1);}}} style={{padding:"14px 18px",borderBottom:`1px solid ${C.border}`,background:n.read?"transparent":C.greenLight,cursor:n.read?"default":"pointer",borderRight:!n.read?`3px solid ${n.type==="warning"?C.warning:C.green}`:"3px solid transparent"}}><div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}><span style={{fontSize:13,fontWeight:n.read?500:700,color:C.text}}>{n.type==="warning"?"⚠️":"ℹ️"} {n.title}</span><span style={{fontSize:10,color:C.light}}>{n.at}</span></div><div style={{fontSize:12,color:C.muted}}>{n.body}</div></div>)}</div></div>;
+}
+

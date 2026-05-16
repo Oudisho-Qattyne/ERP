@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Tajawal, Noto_Sans_Arabic } from "next/font/google";
 import { AppLayoutClient } from "./AppLayout.client";
 import "./globals.css";
 import { InfrastructureProvider } from "@/modules/shared/infrastructure/InfrastructureProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const tajawal = Tajawal({
+  variable: "--font-tajawal",
+  subsets: ["arabic"],
+  weight: ["200", "300", "400", "500", "700", "800", "900"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const noto = Noto_Sans_Arabic({
+  variable: "--font-noto",
+  subsets: ["arabic"],
+  weight: ["200", "300", "400", "500", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -19,18 +21,23 @@ export const metadata: Metadata = {
   description: "المدينة الصناعية في حسياء – ERP + CRM",
 };
 
+import { ThemeProvider } from "@/modules/shared/presentation/context/ThemeContext";
+import { LanguageProvider } from "@/modules/shared/presentation/context/LanguageContext";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-      <InfrastructureProvider>
-          <AppLayoutClient>{children}</AppLayoutClient>
+    <html className={`${noto.variable} ${tajawal.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-background text-text transition-colors duration-300">
+        <InfrastructureProvider>
+          <LanguageProvider>
+            <ThemeProvider>
+              <AppLayoutClient>{children}</AppLayoutClient>
+            </ThemeProvider>
+          </LanguageProvider>
         </InfrastructureProvider>
       </body>
     </html>

@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
 import { Button } from '../buttons/Button';
 import { Dialog } from '../dialog/Dialog';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface SelectOption {
   value: string;
@@ -20,10 +21,13 @@ interface SelectOrCreateProps {
   required?: boolean;
   error?: string;
   disabled?: boolean;
+  searchable?: boolean;
   // Creation dialog props
   createTitle: string;
   renderCreateForm: (onSuccess: (newValue: string, newItem: any) => void, onCancel: () => void) => React.ReactNode;
 }
+
+import { CustomSelect } from './CustomSelect';
 
 export function SelectOrCreate({
   value,
@@ -34,17 +38,20 @@ export function SelectOrCreate({
   required,
   error,
   disabled = false,
+  searchable = false,
   createTitle,
   renderCreateForm,
 }: SelectOrCreateProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const selectedOption = options.find(opt => opt.value === value);
+  const { t } = useLanguage();
 
   const handleCreateSuccess = (newValue: string, newItem: any) => {
     onChange(newValue, newItem);
     setIsDialogOpen(false);
   };
+
+  const translatedError = error ? t(`validation.${error}`, 'shared') : undefined;
+  const finalError = (translatedError && translatedError !== `validation.${error}`) ? translatedError : error;
 
   return (
     <div className="w-full space-y-1.5">
@@ -54,26 +61,16 @@ export function SelectOrCreate({
         </label>
       )}
       <div className="flex gap-2">
-        {/* Dropdown select */}
-        <select
-          value={value || ''}
-          onChange={(e) => onChange(e.target.value, undefined)}
+        <CustomSelect
+          options={options}
+          value={value}
+          onChange={(val) => onChange(val, undefined)}
           disabled={disabled}
-          className={`
-            flex-1 px-3 py-2 rounded-md border border-border bg-card text-text text-sm
-            focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none
-            disabled:opacity-50 disabled:cursor-not-allowed
-            rtl:text-right
-            ${error ? 'border-danger' : ''}
-          `}
-        >
-          <option value="" disabled>{placeholder}</option>
-          {options.map(opt => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
-          ))}
-        </select>
+          placeholder={placeholder}
+          searchable={searchable}
+          baseClasses={`flex-1 px-3 py-2 rounded-md border border-border bg-card text-text text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none ${finalError ? 'border-danger animate-shake' : ''}`}
+        />
 
-        {/* Create button */}
         <Button
           type="button"
           variant="outline"
@@ -81,12 +78,12 @@ export function SelectOrCreate({
           leftIcon={<Plus size={14} />}
           onClick={() => setIsDialogOpen(true)}
           disabled={disabled}
-          className="shrink-0"
+          className="shrink-0 h-[38px]"
         >
-          {disabled ? '' : 'جديد'}
+          {disabled ? '' : t('common.new', 'shared') !== 'common.new' ? t('common.new', 'shared') : 'جديد'}
         </Button>
       </div>
-      {error && <div className="text-danger text-xs mt-1">{error}</div>}
+      {finalError && <div className="text-danger text-xs mt-1 animate-slide-up">{finalError}</div>}
 
       {/* Creation Dialog */}
       <Dialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} title={createTitle} size="md">

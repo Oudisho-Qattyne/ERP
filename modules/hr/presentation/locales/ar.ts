@@ -1,0 +1,107 @@
+export const ar = {
+  dashboard: {
+    title: 'نظرة عامة على الموارد البشرية',
+    welcome: 'مرحباً بك في قسم الموارد البشرية',
+    stats: {
+      employees: 'إجمالي الموظفين',
+      attendance: 'نسبة الحضور',
+      requests: 'طلبات معلقة'
+    }
+  },
+  navigation: {
+    dashboard: 'لوحة التحكم',
+    employees: 'الموظفين',
+    reports: 'التقارير والإحصائيات',
+    hr: 'الموارد البشرية',
+  },
+  reports: {
+    title: 'التقارير والإحصائيات',
+  },
+  hr: {
+    title: 'الموارد البشرية',
+  },
+  employees: {
+    title: 'إدارة الموظفين',
+    subtitle: 'إدارة بيانات الموظفين وعقودهم',
+    add: 'إضافة موظف جديد',
+    save: 'حفظ الموظف',
+    saving: 'جاري الحفظ...',
+    table: {
+      id: 'الرقم الذاتي',
+      name: 'الاسم الكامل',
+      position: 'المسمى الوظيفي',
+      department: 'القسم',
+      contract: 'نوع العقد',
+      date: 'تاريخ التعيين',
+      status: 'الحالة',
+      count: 'عرض {count} من أصل {total} موظف'
+    },
+    sections: {
+      personal: 'المعلومات الشخصية',
+      residence: 'معلومات السكن',
+      organization: 'الهيكل التنظيمي والوظيفي',
+      additional: 'معلومات إضافية',
+      education: 'المؤهلات العلمية',
+      current_study: 'الدراسة الحالية (إن وجد)'
+    },
+    fields: {
+      first_name: 'الاسم',
+      father_name: 'اسم الاب',
+      surname: 'النسبة',
+      mother_name: 'اسم الام',
+      full_name: 'الاسم الثلاثي',
+      national_id: 'الرقم الوطني',
+      personal_id: 'الرقم الذاتي',
+      date_of_birth: 'تاريخ الولادة',
+      place_of_birth: 'مكان الولادة',
+      registration: 'القيد',
+      gender: 'الجنس',
+      marital_status: 'الوضع العائلي',
+      spouse_name: 'اسم الزوج/الزوجة',
+      spouse_employer: 'الجهة المعين لديها الزوج/الزوجة',
+      country: 'الدولة',
+      original_governorate: 'المحافظة الأصل',
+      region: 'المنطقة',
+      residence_governorate: 'مكان الإقامة / المحافظة',
+      residential_area: 'منطقة السكن',
+      org_level_1: 'السوية التنظيمية الأولى',
+      org_level_2: 'السوية التنظيمية الثانية',
+      org_level_3: 'السوية التنظيمية الثالثة',
+      org_level_4: 'السوية التنظيمية الرابعة',
+      org_level_5: 'السوية التنظيمية الخامسة',
+      org_level_6: 'السوية التنظيمية السادسة',
+      job_title: 'المسمى الوظيفي',
+      job_category: 'الفئة الوظيفية',
+      status: 'الحالة',
+      date_of_appointment: 'تاريخ التعيين',
+      contract_pattern: 'نمط التعاقد',
+      contract_nature: 'طبيعة العقد',
+      workplace_governorate: 'مكان العمل / المحافظة',
+      phone_number: 'رقم الهاتف',
+      sham_cash_account: 'حساب شام كاش',
+      health_status: 'الحالة الصحية',
+      illness_type: 'نوع المرض/الإصابة',
+      illness_date: 'تاريخ الإصابة',
+      blood_type: 'زمرة الدم',
+      appointment_certificate: 'الشهادة المعين على أساسها',
+      appointment_university: 'الجامعة',
+      appointment_college: 'الكلية/المعهد',
+      appointment_specialization: 'الاختصاص',
+      appointment_cert_year: 'سنة الحصول على الشهادة',
+      current_study_status: 'الوضع الحالي للدراسة',
+      study_stage: 'المرحلة'
+    },
+    values: {
+      male: 'ذكر',
+      female: 'أنثى',
+      single: 'عازب',
+      married: 'متزوج',
+      active: 'على رأس العمل',
+      on_leave: 'في إجازة',
+      healthy: 'سليم',
+      sick: 'مريض/إصابة',
+      none: 'لا يوجد',
+      studying: 'يتابع دراسته'
+    }
+  }
+};

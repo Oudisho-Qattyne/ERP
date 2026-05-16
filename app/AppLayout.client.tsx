@@ -1,11 +1,13 @@
 'use client';
 
-import { getHideSidebarPaths } from '@/modules/generated/navigation';
+import { getHideSidebarPaths, navItems } from '@/modules/generated/navigation';
 import { Sidebar } from '@/modules/shared/presentation/components/ui/layout/Sidebar';
 import { TopBar } from '@/modules/shared/presentation/components/ui/layout/TopBar';
 import { SidebarProvider } from '@/modules/shared/presentation/context/SidebarContext';
+import { DynamicIcon } from '@/modules/shared/presentation/components/ui/icons/DynamicIcon';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
+import { useLanguage } from '@/modules/shared/presentation/context/LanguageContext';
 
 interface AppLayoutClientProps {
   children: React.ReactNode;
@@ -30,26 +32,49 @@ function matchesPath(pathname: string, patterns: string[]): boolean {
   }
   return false;
 }
+
 export function AppLayoutClient({ children }: AppLayoutClientProps) {
   const pathname = usePathname() || '';
+  const { direction, t } = useLanguage();
   const hiddenPaths = getHideSidebarPaths();
+
   if (matchesPath(pathname, hiddenPaths)) {
     return <>{children}</>;
   }
-const pageTitle = useMemo(() => {
+
+  const { title, icon } = useMemo(() => {
+    const activeItem = navItems.find(item => item.href === pathname);
+
+    if (activeItem) {
+      // Map navigation labels to their title keys in the module
+      const titleKey = `navigation.${activeItem.label}`;
+      const translatedTitle = t(titleKey, activeItem.group || 'shared');
+      
+      return {
+        title: translatedTitle !== titleKey ? translatedTitle : activeItem.label,
+        icon: <DynamicIcon name={activeItem.icon} size={20} className="text-primary" />
+      };
+    }
+
+    // Fallback logic
     const segments = pathname.split('/').filter(Boolean);
     const last = segments[segments.length - 1] || 'dashboard';
-    return last.charAt(0).toUpperCase() + last.slice(1);
-  }, [pathname]);
+    const capitalized = last.charAt(0).toUpperCase() + last.slice(1);
+
+    return {
+      title: capitalized,
+      icon: <DynamicIcon name="LayoutDashboard" size={20} className="text-primary" />
+    };
+  }, [pathname, t]);
 
   return (
-     <SidebarProvider>
-      <div className="flex h-screen bg-background" dir="rtl">
+    <SidebarProvider>
+      <div className="flex h-screen bg-background" dir={direction}>
         <Sidebar user={mockUser} unreadNotifications={2} />
         <div className="flex-1 flex flex-col overflow-hidden">
           <TopBar
-            title={pageTitle}
-            icon="📋"
+            title={title}
+            icon={icon}
             unreadNotifications={2}
             onNotificationClick={() => alert('Notifications clicked')}
             user={mockUser}

@@ -1,0 +1,60 @@
+export interface Employee {
+  id: string;
+  personal_id: string;
+  org_level_1: string;
+  org_level_2?: string;
+  org_level_3?: string;
+  org_level_4?: string;
+  org_level_5?: string;
+  org_level_6?: string;
+  job_title: string;
+  status: string;
+  date_of_appointment: string;
+  contract_pattern: string;
+  contract_nature: string;
+  workplace_governorate: string;
+  job_category: string;
+  spouse_name?: string;
+  spouse_employer?: string;
+  national_id: string;
+  full_name: string;
+  first_name: string;
+  father_name: string;
+  surname: string;
+  mother_name: string;
+  date_of_birth: string;
+  place_of_birth: string;
+  registration: string;
+  country: string;
+  original_governorate: string;
+  region?: string;
+  residence_governorate: string;
+  residential_area: string;
+  marital_status: string;
+  gender: 'male' | 'female';
+  sham_cash_account?: string;
+  phone_number?: string;
+  health_status: string;
+  illness_type?: string;
+  illness_date?: string;
+  blood_type?: string;
+  appointment_certificate?: string;
+  appointment_university?: string;
+  appointment_college?: string;
+  appointment_specialization?: string;
+  appointment_cert_year?: string;
+  modifying_certificate?: string;
+  modifying_university?: string;
+  modifying_college?: string;
+  modifying_specialization?: string;
+  modifying_cert_year?: string;
+  latest_certificate?: string;
+  current_study_status?: string;
+  study_stage?: string;
+  current_study_university?: string;
+  current_study_college?: string;
+  current_study_specialization?: string;
+}
+
+
+

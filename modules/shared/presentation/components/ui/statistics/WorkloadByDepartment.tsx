@@ -1,12 +1,10 @@
-// src/components/dashboard/WorkloadByDepartment.tsx
-'use client';
-
 import React, { useMemo } from 'react';
+import { BarChart3 } from 'lucide-react';
 
 export interface WorkloadItem {
   id: string;
   label: string;
-  icon: string;
+  icon: React.ReactNode;
   count: number;
   color: string;       // e.g., '#7c3aed' or Tailwind class 'bg-purple-600'
   // For Tailwind class background, we'll map to a background style
@@ -34,7 +32,7 @@ export function WorkloadByDepartment({
   return (
     <div className="bg-card rounded-lg border border-border p-5 shadow-sm">
       <h4 className="text-sm font-bold text-text mb-4 flex items-center gap-2">
-        📊 {title}
+        <BarChart3 size={18} className="text-primary" /> {title}
       </h4>
       <div className="space-y-4">
         {departments.map((dept) => {
@@ -54,7 +52,7 @@ export function WorkloadByDepartment({
                       {dept.count}
                     </span>
                   </div>
-                  <div className="h-2 bg-[#e8f0e8] rounded-full overflow-hidden">
+                  <div className="h-2 bg-primary-light/20 rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all duration-300"
                       style={{

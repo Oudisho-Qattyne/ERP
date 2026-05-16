@@ -1,10 +1,10 @@
 // src/components/ui/DependentInput.tsx
 'use client';
 
-import React from 'react';
-import { useFormContext, Path, FieldValues } from 'react-hook-form';
+import React, { useMemo } from 'react';
+import { useFormContext, Path, FieldValues, useFormState } from 'react-hook-form';
 import { SelectOrCreate } from './SelectOrCreate';
-import { Input, InputType } from './Input.tsx';
+import { Input, InputType } from './Input';
 import { ComputedProps, useDependentField } from '../../../hooks/useDependentField';
 
 export interface DependentInputProps<T extends FieldValues> {
@@ -45,39 +45,53 @@ export function DependentInput<T extends FieldValues>({
   max,
   step,
 }: DependentInputProps<T>) {
-  const { register, setValue, getValues, formState: { errors } } = useFormContext<T>();
-  const currentValue = getValues(name);
+  const { setValue, getValues, control } = useFormContext<T>();
+  
+  // Use useFormState to subscribe only to this field's errors
+  // This prevents the component from rerendering when other fields have errors
+  const { errors } = useFormState({ control, name });
   const error = errors[name]?.message as string | undefined;
 
-  // If dependencies are provided, compute dynamic props
-  let dynamicProps: ComputedProps = {};
-  let loading = false;
+  // We use watch(name) here to get the current value and trigger rerenders only when THIS field changes
+  const { watch } = useFormContext<T>();
+  const currentValue = watch(name);
 
-  if (dependsOn.length > 0 && compute) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const hookResult = useDependentField(dependsOn, compute);
-    dynamicProps = hookResult.computed;
-    loading = hookResult.loading;
-  }
+  // If dependencies are provided, compute dynamic props
+  const hasDependencies = dependsOn.length > 0 && compute;
+  
+  // hookResult is called inside the component, but we need to be careful with its internal effects
+  const { computed: dynamicProps, loading } = useDependentField(
+    name,
+    dependsOn,
+    compute || (() => ({}))
+  );
 
   // Merge static and dynamic props (dynamic take precedence)
-  const finalProps = {
+  // Use useMemo to prevent unnecessary object creation on every render
+  const finalProps = useMemo(() => ({
     disabled: dynamicProps.disabled,
     hidden: dynamicProps.hidden,
     placeholder: dynamicProps.placeholder ?? placeholder,
     required: dynamicProps.required ?? required,
     value: dynamicProps.value !== undefined ? dynamicProps.value : currentValue,
     options: dynamicProps.options ?? staticOptions,
-  };
+  }), [dynamicProps, placeholder, required, currentValue, staticOptions]);
 
-  if (dynamicProps.hidden) return null;
-  if (loading && !finalProps.value) {
-    return <div className="text-sm text-muted">جاري التحميل...</div>;
+  if (finalProps.hidden) return null;
+
+  if (loading && !finalProps.value && hasDependencies) {
+    return (
+      <div className="flex flex-col gap-1.5">
+        {label && <label className="text-sm font-medium text-text">{label}</label>}
+        <div className="h-10 w-full bg-primary-light/5 animate-pulse rounded-lg border border-border flex items-center px-4">
+          <span className="text-xs text-text-muted">جاري التحميل...</span>
+        </div>
+      </div>
+    );
   }
 
-  // Helper to update field value
   const handleChange = (val: any) => {
-    setValue(name, val, { shouldValidate: true });
+    setValue(name, val, { shouldValidate: true, shouldDirty: true });
   };
 
   const commonProps = {
@@ -104,7 +118,7 @@ export function DependentInput<T extends FieldValues>({
           error={error}
           createTitle={createTitle}
           renderCreateForm={renderCreateForm || ((onSuccess, onCancel) => (
-            <div>نموذج إنشاء افتراضي – وفر `renderCreateForm`</div>
+            <div className="p-4 text-danger text-sm">يجب توفير renderCreateForm</div>
           ))}
         />
       );
@@ -132,20 +146,10 @@ export function DependentInput<T extends FieldValues>({
       );
 
     case 'file':
-      return (
-        <Input
-          type="file"
-          accept={accept}
-          {...commonProps}
-          value={finalProps.value}
-          onChange={handleChange}
-        />
-      );
-
     case 'image':
       return (
         <Input
-          type="image"
+          type={type}
           accept={accept}
           {...commonProps}
           value={finalProps.value}

@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 
+import { LogOut } from 'lucide-react';
+
 export function LogoutButton({ collapsed }: { collapsed: boolean }) {
   const router = useRouter();
 
@@ -19,7 +21,7 @@ export function LogoutButton({ collapsed }: { collapsed: boolean }) {
         ${collapsed ? 'justify-center py-2 px-0' : 'px-3 py-2 justify-start'}
       `}
     >
-      <span className="text-base">🚪</span>
+      <LogOut size={18} />
       {!collapsed && <span className="text-sm font-semibold">خروج</span>}
     </button>
   );

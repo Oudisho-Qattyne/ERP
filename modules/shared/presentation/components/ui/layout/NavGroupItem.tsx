@@ -3,6 +3,8 @@
 import { NavGroup, NavItem } from '@/modules/registry';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { DynamicIcon } from '../icons/DynamicIcon';
+import { useLanguage } from '../../../context/LanguageContext';
 
 interface NavGroupItemProps {
   group: NavGroup & { items: NavItem[] };
@@ -11,15 +13,24 @@ interface NavGroupItemProps {
 }
 
 export function NavGroupItem({ group, collapsed, unreadCount = 0 }: NavGroupItemProps) {
+  const { t } = useLanguage();
   // For the "main" group (dashboard) we don't show a label
   const showLabel = group.label && group.id !== 'main';
+  
+  // Try module-specific translation first, then shared sidebar key
+  const moduleLabel = t(`navigation.${group.label}`, group.id);
+  const sharedLabel = t(`sidebar.${group.id}`, 'shared');
+  
+  const finalGroupLabel = moduleLabel !== `navigation.${group.label}` 
+    ? moduleLabel 
+    : (sharedLabel !== `sidebar.${group.id}` ? sharedLabel : group.label);
 
   return (
     <div className="mb-2">
       {/* Group header (only when expanded) */}
       {!collapsed && showLabel && (
         <div className="text-[8px] font-bold text-white/20 px-3 pt-3 pb-1 uppercase tracking-wider">
-          {group.label}
+          {finalGroupLabel}
         </div>
       )}
       {/* Separator line when collapsed and group has label */}
@@ -49,7 +60,19 @@ function NavItemLink({
   unread?: number;
 }) {
   const pathname = usePathname();
+  const { t } = useLanguage();
   const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
+
+  // Try module-specific navigation key first (e.g., hr:navigation.employees)
+  // then shared sidebar key (e.g., shared:sidebar.employees)
+  const moduleLabel = item.group ? t(`navigation.${item.label}`, item.group) : item.label;
+  
+  const key = item.id.includes('-') ? item.id.split('-').pop() : item.id;
+  const sharedLabel = t(`sidebar.${key}`, 'shared');
+  
+  const finalLabel = (moduleLabel !== `navigation.${item.label}`)
+    ? moduleLabel
+    : (sharedLabel !== `sidebar.${key}` ? sharedLabel : item.label);
 
   return (
     <Link
@@ -62,10 +85,10 @@ function NavItemLink({
           : 'text-white/45 hover:bg-white/5 hover:text-white/70'
         }
       `}
-      title={collapsed ? item.label : undefined}
+      title={collapsed ? finalLabel : undefined}
     >
-      <span className="text-base shrink-0">{item.icon}</span>
-      {!collapsed && <span className="text-sm font-medium">{item.label}</span>}
+      <DynamicIcon name={item.icon} size={18} className="shrink-0" />
+      {!collapsed && <span className="text-sm font-medium">{finalLabel}</span>}
       {unread && unread > 0 && (
         <span className={`
           absolute top-1 w-2 h-2 rounded-full bg-danger border-2 border-primary-dark

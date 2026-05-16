@@ -5,8 +5,11 @@ import { NavBar } from './NavBar';
 import { UserInfo } from './UserInfo';
 import { CollapseButton } from './CollapseButton';
 import { LogoutButton } from './LogoutButton';
+import { LanguageToggle } from './LanguageToggle';
 import { useSidebar } from '../../../context/SidebarContext';
 import { useNavigation } from '../../../hooks/useNavigation';
+
+import { Shield } from 'lucide-react';
 
 interface SidebarProps {
   user: {
@@ -25,7 +28,7 @@ export function Sidebar({ user, unreadNotifications = 0 }: SidebarProps) {
     <aside
       className={`
         flex flex-col h-screen bg-primary-dark
-        transition-all duration-250 ease-in-out border-l border-gold/20 shrink-0
+        transition-all duration-500 ease-in-out border-l border-gold/20 shrink-0
         ${collapsed ? 'w-16' : 'w-56'}
       `}
     >
@@ -37,7 +40,7 @@ export function Sidebar({ user, unreadNotifications = 0 }: SidebarProps) {
         `}
       >
         <div className="w-8 h-8 rounded-md bg-linear-to-br from-gold to-gold-dark flex items-center justify-center text-lg font-black text-primary-dark shadow-md">
-          🦅
+          <Shield size={18} fill="currentColor" />
         </div>
         {!collapsed && (
           <div>
@@ -56,8 +59,8 @@ export function Sidebar({ user, unreadNotifications = 0 }: SidebarProps) {
       />
 
       {/* Bottom Section */}
-      <div className="border-t border-white/10 pt-2 pb-3 px-2 space-y-2">
-        {/* <UserInfo user={user} collapsed={collapsed} /> */}
+      <div className="border-t border-white/10 pt-2 pb-3 px-2 space-y-1">
+        <LanguageToggle collapsed={collapsed} />
         <LogoutButton collapsed={collapsed} />
         <CollapseButton />
       </div>

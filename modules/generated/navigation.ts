@@ -5,22 +5,62 @@ export const navItems = [
   {
     "id": "login",
     "label": "تسجيل الدخول",
-    "icon": "🏢",
-    "group": "crm",
-    "href": "/users"
+    "icon": "Lock",
+    "group": "",
+    "href": "/auth"
+  },
+  {
+    "id": "hr-dashboard",
+    "label": "dashboard",
+    "icon": "LayoutDashboard",
+    "group": "hr",
+    "href": "/hr/dashboard"
+  },
+  {
+    "id": "hr-employees",
+    "label": "employees",
+    "icon": "Users",
+    "group": "hr",
+    "href": "/hr/employees"
+  },
+  {
+    "id": "hr-reports",
+    "label": "reports",
+    "icon": "BarChart3",
+    "group": "hr",
+    "href": "/hr/reports"
+  },
+  {
+    "id": "list",
+    "label": "navigation.list",
+    "href": "/users",
+    "icon": {},
+    "group": "users"
+  },
+  {
+    "id": "roles",
+    "label": "navigation.roles",
+    "href": "/users/roles",
+    "icon": {},
+    "group": "users"
   }
 ];
 
 export const navGroups = [
   {
-    "id": "crm",
-    "label": "إدارة علاقات المستثمرين",
-    "order": 2
+    "id": "hr",
+    "label": "hr",
+    "order": 1
+  },
+  {
+    "id": "users",
+    "label": "navigation.users",
+    "order": 1
   }
 ];
 
 export const hideSidebarPaths = [
-  "/users/*"
+  "/auth*"
 ];
 
 export function getAllNavItems() {

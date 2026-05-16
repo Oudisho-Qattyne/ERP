@@ -1,0 +1,107 @@
+export const en = {
+  dashboard: {
+    title: 'HR Overview',
+    welcome: 'Welcome to HR Department',
+    stats: {
+      employees: 'Total Employees',
+      attendance: 'Attendance Rate',
+      requests: 'Pending Requests'
+    }
+  },
+  navigation: {
+    dashboard: 'Dashboard',
+    employees: 'Employees',
+    reports: 'Reports & Analytics',
+    hr: 'Human Resources',
+  },
+  reports: {
+    title: 'Reports & Analytics',
+  },
+  hr: {
+    title: 'Human Resources',
+  },
+  employees: {
+    title: 'Employee Management',
+    subtitle: 'Manage employee data and contracts',
+    add: 'Add New Employee',
+    save: 'Save Employee',
+    saving: 'Saving...',
+    table: {
+      id: 'Internal ID',
+      name: 'Full Name',
+      position: 'Job Title',
+      department: 'Department',
+      contract: 'Contract Type',
+      date: 'Appointment Date',
+      status: 'Status',
+      count: 'Showing {count} of {total} employees'
+    },
+    sections: {
+      personal: 'Personal Information',
+      residence: 'Residence Information',
+      organization: 'Organizational Structure',
+      additional: 'Additional Information',
+      education: 'Educational Qualifications',
+      current_study: 'Current Studies (if any)'
+    },
+    fields: {
+      first_name: 'First Name',
+      father_name: 'Father Name',
+      surname: 'Surname',
+      mother_name: 'Mother Name',
+      full_name: 'Full Name',
+      national_id: 'National ID',
+      personal_id: 'Internal ID',
+      date_of_birth: 'Date of Birth',
+      place_of_birth: 'Place of Birth',
+      registration: 'Registration',
+      gender: 'Gender',
+      marital_status: 'Marital Status',
+      spouse_name: 'Spouse Name',
+      spouse_employer: 'Spouse Employer',
+      country: 'Country',
+      original_governorate: 'Original Governorate',
+      region: 'Region',
+      residence_governorate: 'Residence Governorate',
+      residential_area: 'Residential Area',
+      org_level_1: 'Org Level 1',
+      org_level_2: 'Org Level 2',
+      org_level_3: 'Org Level 3',
+      org_level_4: 'Org Level 4',
+      org_level_5: 'Org Level 5',
+      org_level_6: 'Org Level 6',
+      job_title: 'Job Title',
+      job_category: 'Job Category',
+      status: 'Status',
+      date_of_appointment: 'Appointment Date',
+      contract_pattern: 'Contract Pattern',
+      contract_nature: 'Contract Nature',
+      workplace_governorate: 'Workplace Governorate',
+      phone_number: 'Phone Number',
+      sham_cash_account: 'Sham Cash Account',
+      health_status: 'Health Status',
+      illness_type: 'Illness Type',
+      illness_date: 'Illness Date',
+      blood_type: 'Blood Type',
+      appointment_certificate: 'Appointment Certificate',
+      appointment_university: 'University',
+      appointment_college: 'College/Institute',
+      appointment_specialization: 'Specialization',
+      appointment_cert_year: 'Certification Year',
+      current_study_status: 'Current Study Status',
+      study_stage: 'Study Stage'
+    },
+    values: {
+      male: 'Male',
+      female: 'Female',
+      single: 'Single',
+      married: 'Married',
+      active: 'Active',
+      on_leave: 'On Leave',
+      healthy: 'Healthy',
+      sick: 'Sick/Injured',
+      none: 'None',
+      studying: 'Studying'
+    }
+  }
+};

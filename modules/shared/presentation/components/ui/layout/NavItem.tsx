@@ -13,9 +13,16 @@ interface NavItemProps {
   onClick?: () => void;
 }
 
+import { useLanguage } from '../../../context/LanguageContext';
+
 export function NavItem({ id, label, icon, href, unread, collapsed, onClick }: NavItemProps) {
   const pathname = usePathname();
+  const { t } = useLanguage();
   const isActive = pathname === href || pathname?.startsWith(href + '/');
+
+  const key = id.includes('-') ? id.split('-').pop() : id;
+  const translatedLabel = t(`sidebar.${key}`, 'shared');
+  const finalLabel = translatedLabel !== `sidebar.${key}` ? translatedLabel : label;
 
   return (
     <Link
@@ -29,10 +36,10 @@ export function NavItem({ id, label, icon, href, unread, collapsed, onClick }: N
           : 'text-white/45 hover:bg-white/5 hover:text-white/70'
         }
       `}
-      title={collapsed ? label : undefined}
+      title={collapsed ? finalLabel : undefined}
     >
       <span className="text-base shrink-0">{icon}</span>
-      {!collapsed && <span className="text-sm font-medium">{label}</span>}
+      {!collapsed && <span className="text-sm font-medium">{finalLabel}</span>}
       {unread && unread > 0 && (
         <span className={`
           absolute top-1 left-7 w-2 h-2 rounded-full bg-danger border-2 border-primary-dark

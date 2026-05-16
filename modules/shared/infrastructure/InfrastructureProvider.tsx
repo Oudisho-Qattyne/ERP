@@ -1,4 +1,3 @@
-// src/infrastructure/InfrastructureProvider.tsx
 'use client';
 
 import React, { createContext, useContext, useMemo } from 'react';

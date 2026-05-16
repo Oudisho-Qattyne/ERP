@@ -1,15 +1,21 @@
-// Export the actual page component (not a lazy wrapper)
-// export { default } from './components/Login';
-
 'use client';
 
-import { routes } from './routes';
-import ModuleRouter from '../../shared/presentation/ModuleRouter';
+import React from 'react';
+import UserListPage from './pages/UserListPage';
+import RoleListPage from './pages/RoleListPage';
 
-interface InvestorsModuleProps {
+interface UsersModuleProps {
   subPath?: string[];
 }
 
-export default function InvestorsModule({ subPath = [] }: InvestorsModuleProps) {
-  return <ModuleRouter routes={routes} subPath={subPath} />;
+export default function UsersModule({ subPath }: UsersModuleProps) {
+  const path = subPath?.[0] || 'list';
+
+  switch (path) {
+    case 'roles':
+      return <RoleListPage />;
+    case 'list':
+    default:
+      return <UserListPage />;
+  }
 }

@@ -44,7 +44,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-md font-bold transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer';
+    const baseClasses = 'inline-flex items-center justify-center gap-2 rounded-md font-bold transition-all duration-300 ease-out focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:scale-[1.02] active:scale-[0.98] active:translate-y-[1px]';
     const variantClass = variantClasses[variant];
     const sizeClass = sizeClasses[size];
     const widthClass = fullWidth ? 'w-full' : '';

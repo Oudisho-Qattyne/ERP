@@ -13,12 +13,17 @@ export function useColumnResize({ initialWidths = [], minWidth = 60 }: UseColumn
     columnIndex: -1,
     startX: 0,
     startWidth: 0,
+    direction: 'rtl', // default
   });
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!resizingRef.current.active) return;
-    const { columnIndex, startX, startWidth } = resizingRef.current;
-    const delta = e.clientX - startX;
+    const { columnIndex, startX, startWidth, direction } = resizingRef.current;
+    
+    // In RTL: moving left (decreasing clientX) increases width
+    // In LTR: moving right (increasing clientX) increases width
+    const delta = direction === 'rtl' ? (startX - e.clientX) : (e.clientX - startX);
+    
     const newWidth = Math.max(minWidth, startWidth + delta);
     setColumnWidths(prev => {
       const updated = [...prev];
@@ -33,12 +38,13 @@ export function useColumnResize({ initialWidths = [], minWidth = 60 }: UseColumn
     document.removeEventListener('mouseup', handleMouseUp);
   }, [handleMouseMove]);
 
-  const startResize = (columnIndex: number, startX: number, startWidth: number) => {
+  const startResize = (columnIndex: number, startX: number, startWidth: number, direction: string = 'rtl') => {
     resizingRef.current = {
       active: true,
       columnIndex,
       startX,
       startWidth,
+      direction,
     };
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
